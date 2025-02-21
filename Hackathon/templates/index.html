@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealpredAI - Disease Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="/" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        <div class="nav-actions">
+            <button class="help-btn" onclick="showHelp()">
+                <i class="fas fa-question-circle"></i> Need Help?
+            </button>
+            <button class="emergency-btn" onclick="showEmergencyContacts()">
+                <i class="fas fa-phone"></i> Emergency
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>AI Disease Prediction System</h1>
+                    <p class="subtitle">Advanced Healthcare Analysis for Rural Communities</p>
+                </div>
+                <div class="header-info">
+                    <div class="info-card">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>95% Accuracy</span>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-clock"></i>
+                        <span>Instant Results</span>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-user-md"></i>
+                        <span>Expert System</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="prediction-container">
+                <!-- Patient Info Section -->
+                <div class="form-section patient-info">
+                    <h2>Patient Information</h2>
+                    <form id="predictionForm">
+                        <div class="input-row">
+                            <div class="form-group">
+                                <label for="age">Patient Age</label>
+                                <input type="number" id="age" name="age" min="1" max="120" required 
+                                       placeholder="Enter age">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Patient Gender</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Symptoms Selection -->
+                        <div class="symptoms-container">
+                            <h3>Select Symptoms</h3>
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="symptomSearch" placeholder="Search symptoms...">
+                            </div>
+                            <div class="symptom-categories">
+                                <div class="category-tabs">
+                                    <button type="button" class="category-tab active" data-category="all">
+                                        <i class="fas fa-list"></i> All
+                                    </button>
+                                    <button type="button" class="category-tab" data-category="common">
+                                        <i class="fas fa-star"></i> Common
+                                    </button>
+                                    <button type="button" class="category-tab" data-category="respiratory">
+                                        <i class="fas fa-lungs"></i> Respiratory
+                                    </button>
+                                    <button type="button" class="category-tab" data-category="digestive">
+                                        <i class="fas fa-stomach"></i> Digestive
+                                    </button>
+                                    <button type="button" class="category-tab" data-category="cardiovascular">
+                                        <i class="fas fa-heart"></i> Cardiovascular
+                                    </button>
+                                    <button type="button" class="category-tab" data-category="neurological">
+                                        <i class="fas fa-brain"></i> Neurological
+                                    </button>
+                                    <button type="button" class="category-tab" data-category="musculoskeletal">
+                                        <i class="fas fa-bone"></i> Musculoskeletal
+                                    </button>
+                                    <button type="button" class="category-tab" data-category="other">
+                                        <i class="fas fa-plus"></i> Other
+                                    </button>
+                                </div>
+                                <div class="symptom-grid" id="symptomGrid">
+                                    <!-- Symptoms will be populated via JavaScript as buttons -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">Get Prediction</button>
+                            <button type="button" class="reset-btn" id="resetBtn">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Results Section -->
+                <div class="result-section" id="resultSection">
+                    <!-- Results will be displayed here -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="emergency-info">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Emergency Information</h4>
+                    <p>For immediate medical attention:</p>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> Emergency: 112</li>
+                        <li><i class="fas fa-ambulance"></i> Ambulance: 102</li>
+                        <li>
+                            <i class="fas fa-hospital"></i> 
+                            <a href="#" id="findHospital" title="Find nearest hospitals">
+                                Find Nearest Hospital <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="disclaimer-info">
+                    <h4><i class="fas fa-info-circle"></i> Important Notice</h4>
+                    <p>This is an AI-powered prediction tool and should not replace professional medical advice.</p>
+                    <p>Always consult with healthcare professionals for proper diagnosis and treatment.</p>
+                </div>
+                <div class="support-info">
+                    <h4><i class="fas fa-headset"></i> Support</h4>
+                    <p>Need help? Contact our support team:</p>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> Email: atharva.rahate374@gmail.com</li>
+                        <li><i class="fas fa-phone-alt"></i> Helpline: 8149812710</li>
+                        <li><i class="fas fa-clock"></i> Available 24/7</li>
+                        <li>
+                            <a href="https://github.com/CrazAr374" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/atharva-rahate-272390269/" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
