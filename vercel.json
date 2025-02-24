@@ -7,14 +7,9 @@
   ]
 }
 {
-  "functions": {
-    "api/*.py": {
-      "runtime": "python@latest",
-      "maxDuration": 10
-    }
-  },
   "ignoreBuildStep": [
     "static/uploads/",
-    "logs/"
+    "logs/",
+    "models/"
   ]
 }
